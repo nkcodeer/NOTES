@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Notes App</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Notes</h1>
+        {% if user %}
+            <p>Logged in as: {{ user }}</p>
+            <a href="/logout" class="btn btn-danger">Logout</a>
+        {% else %}
+            <a href="/login" class="btn btn-primary">Login</a>
+        {% endif %}
+        
+        <h2 class="mt-4">Categories</h2>
+        <div class="list-group mb-3">
+            <a href="{{ url_for('category_notes', category_name='College Notes') }}" class="list-group-item list-group-item-action">College Notes</a>
+            <a href="{{ url_for('category_notes', category_name='Study Notes') }}" class="list-group-item list-group-item-action">Study Notes</a>
+            <a href="{{ url_for('category_notes', category_name='Travel Notes') }}" class="list-group-item list-group-item-action">Travel Notes</a>
+        </div>
+
+        <h2 class="mt-4">Add a New Note</h2>
+        <form action="/add_note" method="POST" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="note" class="form-control" placeholder="Add a new note" required>
+                <select name="category" class="form-control" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="College Notes">College Notes</option>
+                    <option value="Study Notes">Study Notes</option>
+                    <option value="Travel Notes">Travel Notes</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
